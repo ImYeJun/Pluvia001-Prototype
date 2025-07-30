@@ -5,6 +5,10 @@ public class PlayerInteractor : MonoBehaviour
 {
     public static PlayerInteractor Instance { get; private set; }
 
+    [SerializeField] private Material _highlightMaterai;
+    private SpriteRenderer _currentObjectSpriteRenderer;
+    private Material _originalMaterai;
+
     private IInteractable _interactObject;
     private List<Collider2D> _currentColliders = new List<Collider2D>();
     private PlayerState _currentState;
@@ -17,11 +21,15 @@ public class PlayerInteractor : MonoBehaviour
         }
         else
         {
-            Destroy(gameObject); 
+            Destroy(gameObject);
             return;
         }
 
         _currentState = PlayerState.Idle;
+        _interactObject = null;
+
+        _currentObjectSpriteRenderer = null;
+        _originalMaterai = null;
     }
 
     private void Update()
@@ -43,6 +51,7 @@ public class PlayerInteractor : MonoBehaviour
     {
         float shortestDistance = float.MaxValue;
         IInteractable closest = null;
+        SpriteRenderer closestRenderer = null;
 
         foreach (var col in _currentColliders)
         {
@@ -53,10 +62,25 @@ public class PlayerInteractor : MonoBehaviour
             {
                 shortestDistance = distance;
                 closest = col.GetComponent<IInteractable>();
+                closestRenderer = col.GetComponent<SpriteRenderer>();
             }
         }
 
+        if (_interactObject != closest) { HighlightObject(closestRenderer); }
+
         _interactObject = closest;
+    }
+
+    private void HighlightObject(SpriteRenderer renderer)
+    {
+        if (_currentObjectSpriteRenderer != null)
+        {
+            _currentObjectSpriteRenderer.material = _originalMaterai;
+        }
+        _currentObjectSpriteRenderer = renderer;
+
+        _originalMaterai = renderer.material;
+        renderer.material = _highlightMaterai;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -79,6 +103,10 @@ public class PlayerInteractor : MonoBehaviour
             if (collision.GetComponent<IInteractable>() == _interactObject)
             {
                 _interactObject = null;
+
+                _currentObjectSpriteRenderer.material = _originalMaterai;
+                _currentObjectSpriteRenderer = null;
+                _originalMaterai = null;
             }
         }
     }
