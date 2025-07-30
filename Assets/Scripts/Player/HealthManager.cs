@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using Cinemachine;
 using UnityEngine;
 
 public class HealthManager : MonoBehaviour
@@ -11,6 +12,14 @@ public class HealthManager : MonoBehaviour
 
     [SerializeField] private bool _isInvincible;
     [SerializeField] private float _invincibleTime;
+
+    private SpriteRenderer _spriteRenderer;
+    [SerializeField] private Material _hitEffectMaterial;
+    private Material _originalMaterial;
+
+    [SerializeField] private CinemachineVirtualCamera _cinemachineVirtualCamera;
+    [SerializeField] private float _shakeTime;
+    [SerializeField] private float _shakeIntensity;
 
     private const int MAX_HEALTH = 100;
     private const int MIN_HEALTH = 0;
@@ -30,6 +39,9 @@ public class HealthManager : MonoBehaviour
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
+
+            _spriteRenderer = GetComponent<SpriteRenderer>();
+            _originalMaterial = _spriteRenderer.material;
         }
         else
         {
@@ -59,6 +71,7 @@ public class HealthManager : MonoBehaviour
             }
 
             StartCoroutine(GetInvincible());
+            StartCoroutine(ShakeCamera());
 
             _healthChangeObserver(_health, MAX_HEALTH);
         }
@@ -67,10 +80,24 @@ public class HealthManager : MonoBehaviour
     private IEnumerator GetInvincible()
     {
         _isInvincible = true;
+        _originalMaterial = _spriteRenderer.material;
 
+        _spriteRenderer.material = _hitEffectMaterial;
         yield return new WaitForSeconds(_invincibleTime);
 
+        _spriteRenderer.material = _originalMaterial;
         _isInvincible = false;
+    }
+
+    private IEnumerator ShakeCamera()
+    {
+        CinemachineBasicMultiChannelPerlin sex = _cinemachineVirtualCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
+
+        sex.m_AmplitudeGain = _shakeIntensity;
+
+        yield return new WaitForSeconds(_shakeTime);
+
+        sex.m_AmplitudeGain = 0;
     }
 
     //! Test

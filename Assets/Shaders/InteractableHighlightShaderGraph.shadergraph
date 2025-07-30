@@ -2551,8 +2551,8 @@
     "m_ShaderOutputName": "Strength",
     "m_StageCapability": 3,
     "m_Value": {
-        "x": 300.0,
-        "y": 300.0
+        "x": 100.0,
+        "y": 100.0
     },
     "m_DefaultValue": {
         "x": 10.0,
@@ -8462,7 +8462,7 @@
     "m_Title": "Outline",
     "m_Position": {
         "x": -4869.0,
-        "y": 1534.999755859375
+        "y": 1535.0
     }
 }
 
