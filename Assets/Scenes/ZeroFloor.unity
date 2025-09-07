@@ -4829,7 +4829,7 @@ MonoBehaviour:
           m_CallState: 2
     - m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 0}
+        - m_Target: {fileID: 830764814}
           m_TargetAssemblyTypeName: ToEasterEggController, Assembly-CSharp
           m_MethodName: LockDoor
           m_Mode: 1
