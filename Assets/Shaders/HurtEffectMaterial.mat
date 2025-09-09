@@ -38,7 +38,7 @@ Material:
     m_Ints: []
     m_Floats:
     - _CellDensity: 3.69
-    - _CoverSize: 1.5955714
+    - _CoverSize: 1.5374285
     - _Fullscreen_AlphaBlendOperation: 0
     - _Fullscreen_BlendMode: 1
     - _Fullscreen_ColorBlendOperation: 0
