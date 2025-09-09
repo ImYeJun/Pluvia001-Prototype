@@ -36,7 +36,7 @@ MonoBehaviour:
         _lineId: 
         _actor: {fileID: 11400000, guid: 12b8c49358f41de478362c9dcd1c7576, type: 2}
         _emotion: 0
-        _content: "\uB044\uB534 \uAC8C \uBCF4\uACE0 \uC2F6\uC740 \uAC70\uC57C?"
+        _content: "\uADF8\uB534 \uAC8C \uBCF4\uACE0 \uC2F6\uC740 \uAC70\uC57C?"
     - rid: 7990673914648330356
       type: {class: CharacterLine, ns: , asm: Assembly-CSharp}
       data:

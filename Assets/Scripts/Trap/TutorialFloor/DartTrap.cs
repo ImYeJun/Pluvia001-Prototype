@@ -1,6 +1,4 @@
 using System.Collections;
-using UnityEditor.Search;
-using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 
 public class DartTrap : TrapLogic
