@@ -18,6 +18,7 @@ public class GameEnder : InteractableObject
         if (TutorialManager.Instance.HasCompletedTutorial())
         {
             UnsetInteractable();
+            PlayerStateManager.Instance.SetState(PlayerState.Uncontrolable);
             GameSceneManager.Instance.LoadScene(SceneId.Ending);
         }
         else

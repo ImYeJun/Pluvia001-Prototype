@@ -8,7 +8,7 @@ public delegate void TutorialHandler(TutorialState currentState, TutorialState c
 public class TutorialManager : MonoBehaviour
 {
     [SerializeField] private List<CutSceneActivator> _cutSceneActivators;
-    private TutorialState _currentState;
+    [SerializeField] private TutorialState _currentState;
     public static TutorialManager Instance { get; private set; }
     private event TutorialHandler _onStateChanged;
 
